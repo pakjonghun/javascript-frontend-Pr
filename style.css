@@ -78,9 +78,57 @@ body{
 
 .absolute{
     position: absolute;
+    cursor: pointer;
 }
+
+.absolute:hover{
+    opacity: .9;
+}
+
+.absolute:active{
+    opacity: .8;
+}
+
+
+
+.dialog{
+    position: absolute;
+    width:100vw;
+    height:100vh;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.alertBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding:3rem 5rem;
+    margin-top: 15rem;
+    border-radius: 1rem;
+    background-color: rgba(0, 0, 0, 0.3);
+    font-size: 2rem;
+}
+
+.retry{
+    padding: 1rem 2rem;
+    margin-bottom: 1rem;
+    border-radius: .5rem;
+    z-index: 1;
+}
+
+.retry:hover{
+    opacity: .8;
+}
+
+.retry:active{
+    opacity: .5;
+}
+
 
 .none{
     display: none;
 }
-

@@ -8,9 +8,18 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
     <link rel="stylesheet" href="./style.css">
     <script defer src="./index.js"></script>
+    <script defer src="./modal.js"></script>
     <script defer src="./location.js"></script>
+    <script defer src="./sound.js"></script>
 </head>
 <body>
+    <audio src="sound/alert.wav"></audio>
+    <div class="dialog none">
+        <div class="alertBox">
+            <button class="retry">retry</button>
+            <span class="message">졌습니다.</span>
+        </div>
+    </div>
     <section class="section">
         <header class="header">
             <div class="timer">

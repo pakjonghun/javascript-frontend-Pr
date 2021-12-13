@@ -4,20 +4,24 @@ const count=document.querySelector('.count');
 const play =document.querySelector('.fa-play');
 const pause=document.querySelector('.fa-pause');
 
-
 const initSecond = 3;
 const initMilSecond=0;
+const initCount = 3;
 
 let interval;
 let second=initSecond;
 let milSecond=initMilSecond;
+let carrotCount = initCount;
+let isPlaying=false;
 
 function handleTimer(){
     handleMilSecond();
     renderTime();
-    if(!second)stopTimer();
+    if(!second){
+        stopTimer();
+        loseGame();
+    }
 }
-
 
 function renderTimerButton(){
     play.classList.toggle('none');
@@ -25,8 +29,6 @@ function renderTimerButton(){
 }
 
 function initializeButton(){
-    console.log(play.classList.contains('none'));
-    console.log(play.classList.value)
     if(play.classList.contains('none')){
         play.classList.remove('none');
     }
@@ -36,13 +38,29 @@ function initializeButton(){
     }
 }
 
+function countRender(){
+    count.textContent=carrotCount;
+}
+
 function timerTrigger(){
+    
+    if(!isPlaying){
+        renderItems({bug:10,carrot:3});
+        isPlaying=true;
+    }
+
     if(!interval){
         startTimer();
+        main.addEventListener('click',onTargetCLick)
     }else{
         pauseTimer();
+        main.removeEventListener('click',onTargetCLick)
+
     }
+
+
     renderTimerButton();
+    countRender();
 }
 
 function pauseTimer(){
@@ -81,6 +99,7 @@ function renderTime(){
 
     time.textContent=`${newSecond}:${newMilSecond}`
 }
+
 
 function init(){
     start.addEventListener('click',timerTrigger);
