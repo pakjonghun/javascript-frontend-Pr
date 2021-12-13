@@ -3,10 +3,8 @@ const newLocation =main.getBoundingClientRect();
 const CARROT='carrot';
 const BUG='bug';
 
-function getRandomLocation(){
-    const x =Math.floor(Math.random()*newLocation.width+1);
-    const y = Math.floor(Math.random()*newLocation.height+1);
-    return {x,y}
+function getRandomLocation(min,max){
+    return Math.random() * (max - min) + min;
 }
 
 function randomItemMaker(item){
@@ -14,16 +12,18 @@ function randomItemMaker(item){
     temp.setAttribute('src',`./img/${item}.png`);
     temp.classList.add(`absolute`);
     temp.classList.add(item);
-    const {x,y}=getRandomLocation();
-    temp.style.transform=`translate(${x-temp.width/2}px,${y-temp.height/2}px)`;
+    const x=getRandomLocation(0,newLocation.width);
+    const y = getRandomLocation(0,newLocation.height);
+    console.log(0,newLocation.width,x)
+    console.log(0,newLocation.height,y)
+    temp.style.transform=`translate(${x<80?x:x-80}px,${y<80?y:y-80}px)`;
     main.appendChild(temp);
 }
 
 
 
 function renderItems({bug,carrot}){
-    const rest = document.querySelectorAll('.absolute');
-    rest.forEach(item=>item.remove());
+    main.innerHTML=""
 
 
     for(let i = 0;i<bug;i++){
