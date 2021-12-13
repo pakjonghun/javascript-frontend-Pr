@@ -56,6 +56,8 @@ function winGame(){
 }
 
 function onTargetCLick(event){
+    if(!isPlaying)return;
+
     const contain = event.target.classList;
 
     switch (true) {

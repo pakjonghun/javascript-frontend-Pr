@@ -51,10 +51,8 @@ function timerTrigger(){
 
     if(!interval){
         startTimer();
-        main.addEventListener('click',onTargetCLick)
     }else{
         pauseTimer();
-        main.removeEventListener('click',onTargetCLick)
 
     }
 
