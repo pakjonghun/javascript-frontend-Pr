@@ -17,3 +17,5 @@ if(target.match('.carrot'))console.log('carrot');
 ```
 
 ## 클레스에는 오로지 재료만 넣었다.(다른 클레스 요소는 정말 어 쩔 수 없을때만 넣었다.)
+
+## target.matches('.class'); 이렇게 간단히 확인가능 contains 안해도 된다.
