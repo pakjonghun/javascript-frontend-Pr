@@ -1,0 +1,19 @@
+{
+  "name": "carrot",
+  "version": "1.0.0",
+  "description": "- 이벤트를 삭제하거나 반복문을 써서 스타일을 바꾸거나 하지 말자. 위 처럼 쉬운 방법이 있다.",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server -c-1 -p 8081"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pakjonghun/javascript-frontend-Pr.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pakjonghun/javascript-frontend-Pr/issues"
+  },
+  "homepage": "https://github.com/pakjonghun/javascript-frontend-Pr#readme"
+}
