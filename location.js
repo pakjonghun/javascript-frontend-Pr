@@ -14,8 +14,6 @@ function randomItemMaker(item){
     temp.classList.add(item);
     const x=getRandomLocation(0,newLocation.width);
     const y = getRandomLocation(0,newLocation.height);
-    console.log(0,newLocation.width,x)
-    console.log(0,newLocation.height,y)
     temp.style.transform=`translate(${x<80?x:x-80}px,${y<80?y:y-80}px)`;
     main.appendChild(temp);
 }
@@ -41,6 +39,8 @@ function loseGame(){
     stopTimer();
     isPlaying=false;
     carrotCount= initCount;
+    makeSounds('alert.wav').play();
+    sounds.bg.pause();
 }
 
 
@@ -52,6 +52,8 @@ function winGame(){
     carrotCount= initCount
     stopTimer();
     isPlaying=false
+    makeSounds('game_win.mp3').play();
+    sounds.bg.pause();
 
 }
 
@@ -65,6 +67,7 @@ function onTargetCLick(event){
             loseGame();
             break;
         case contain.contains(CARROT):
+            makeSounds('carrot_pull.mp3').play();
             --carrotCount
             countRender();
             event.target.classList.add('none');

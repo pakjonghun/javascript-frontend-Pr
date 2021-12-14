@@ -4,6 +4,11 @@ const count=document.querySelector('.count');
 const play =document.querySelector('.fa-play');
 const pause=document.querySelector('.fa-pause');
 
+const sounds = {
+    bg:new Audio('./sound/bg.mp3')
+}
+
+
 const initSecond = 3;
 const initMilSecond=0;
 const initCount = 3;
@@ -45,13 +50,17 @@ function countRender(){
 function timerTrigger(){
     
     if(!isPlaying){
+        sounds.bg.currentTime=0;
+        sounds.bg.play();
         renderItems({bug:10,carrot:3});
         isPlaying=true;
     }
 
     if(!interval){
+        sounds.bg.play();
         startTimer();
     }else{
+        sounds.bg.pause();
         pauseTimer();
 
     }

@@ -12,8 +12,6 @@ body{
     width:100vw;
     height:100vh;
     background: url(img/background.png) center/cover;
-
-    
 }
 
 .header{
@@ -55,6 +53,7 @@ body{
     margin: 1rem auto;
     width:6rem;
     background-color: white;
+    user-select: none;
 }
 
 .count{
@@ -64,6 +63,8 @@ body{
     padding: 1.5rem;
     border-radius: 50%;
     background-color: pink;
+    user-select: none;
+
 }
 
 .main{
