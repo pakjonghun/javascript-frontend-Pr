@@ -36,8 +36,8 @@ export default class Field {
   };
 
   render = () => {
-    this._locateItems("bug");
-    this._locateItems("carrot");
+    this._locateItems(ItemName.bug);
+    this._locateItems(ItemName.carrot);
   };
 
   setIsPlaying = (isPlaying) => {
@@ -45,7 +45,7 @@ export default class Field {
   };
 
   _locateItems = (className) => {
-    const number = className === "carrot" ? this.carrots : this.bugs;
+    const number = className === ItemName.carrot ? this.carrots : this.bugs;
     for (let i = 0; i < number; i++) {
       const item = this._createItem(className);
       this.field.appendChild(item);
