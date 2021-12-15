@@ -39,13 +39,9 @@ export default class Field {
     }
   };
 
-  _getRandomNumber = (min, max) => {
-    return Math.random() * (max - min) + min;
-  };
-
   _getInFieldXY = () => {
-    const x = this._getRandomNumber(0, this.field.clientWidth) - 80;
-    const y = this._getRandomNumber(0, this.field.clientHeight) - 80;
+    const x = _getRandomNumber(0, this.field.clientWidth) - 80;
+    const y = _getRandomNumber(0, this.field.clientHeight) - 80;
     return { x: x < 80 ? x + 80 : x, y: y < 80 ? y + 80 : y };
   };
 
@@ -59,4 +55,8 @@ export default class Field {
     item.style.transform = `translate(${x}px,${y}px)`;
     return item;
   };
+}
+
+function _getRandomNumber(min, max) {
+  return Math.random() * (max - min) + min;
 }

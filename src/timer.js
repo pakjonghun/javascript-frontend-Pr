@@ -7,11 +7,11 @@ export default class Timer {
   }
 
   start = (actionFunc) => {
-    this.interval = window.setInterval(actionFunc, 1000);
+    this.interval = setInterval(actionFunc, 1000);
   };
 
   pause = () => {
-    window.clearInterval(this.interval);
+    clearInterval(this.interval);
     this.interval = null;
   };
 
