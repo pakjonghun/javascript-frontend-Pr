@@ -1,15 +1,21 @@
+"use strict";
+
 import Field from "./field.js";
 import Score from "./score.js";
-import Sound from "./sound.js";
 import Timer from "./timer.js";
 import TimeBtn from "./timerBtn.js";
 
-const sound = new Sound();
+export const ItemName = Object.freeze({
+  carrot: "carrot",
+  bug: "bug",
+});
 
 export const Status = Object.freeze({
+  start: "start",
   win: "win",
   lose: "lose",
   pause: "pause",
+  restart: "restart",
 });
 
 export default class GameBuilder {
@@ -47,25 +53,23 @@ class Game {
     this.timeBtn.setOnClick(this.onTimeBtnClick);
   }
 
-  onItemClick = (classList) => {
-    switch (true) {
-      case classList.contains("carrot"):
-        sound.carrotSound.play();
+  onItemClick = (itemName) => {
+    switch (itemName) {
+      case ItemName.carrot:
         this.score.onCarrotClick();
+        this.stopListener && this.stopListener(ItemName.carrot);
+
         if (!this.score.getCurCarrot()) {
-          sound.win.play();
-          sound.bgSound.pause();
-          this.end(Status.lose);
+          this.end(Status.win);
         }
         break;
-      case classList.contains("bug"):
-        sound.bgSound.pause();
-        sound.lose.play();
+
+      case ItemName.bug:
         this.end(Status.lose);
         break;
 
       default:
-        break;
+        throw new Error("오류발생");
     }
   };
 
@@ -73,10 +77,8 @@ class Game {
     this.stopListener = func;
   };
 
-  onTimerStart = () => {
+  timeBtnAddFunc = () => {
     if (!this.timer.totalSecond) {
-      sound.bgSound.pause();
-      sound.lose.play();
       this.end(Status.lose);
       return;
     }
@@ -90,22 +92,20 @@ class Game {
     this.field.setIsPlaying(this.timeBtn.isPlay);
 
     if (this.timeBtn.isPlay) {
-      sound.bgSound.pause();
       this.timer.pause();
       this.stopListener && this.stopListener(Status.pause);
       return;
     }
 
     if (this.isEnded) {
-      sound.bgSound.currentTime = 0;
-      sound.bgSound.play();
+      this.stopListener && this.stopListener(Status.start);
       this.field.render();
       this.score.reset(this.initCarrots);
       this.isEnded = false;
     }
 
-    sound.bgSound.play();
-    this.timer.start(this.onTimerStart);
+    this.timer.start(this.timeBtnAddFunc);
+    this.stopListener && this.stopListener(Status.restart);
   };
 
   end = (status) => {

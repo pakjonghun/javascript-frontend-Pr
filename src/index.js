@@ -1,5 +1,9 @@
-import GameBuilder, { Status } from "./game.js";
+"use strict";
+
+import GameBuilder, { ItemName, Status } from "./game.js";
+import Sound from "./sound.js";
 import Modal from "./model.js";
+const sound = new Sound();
 
 const modal = new Modal();
 const game = new GameBuilder()
@@ -12,20 +16,26 @@ modal.setOnClick(readyToRestart);
 
 const stopListener = (gameStatus) => {
   switch (gameStatus) {
+    case Status.start:
+      sound.bgSound.currentTime = 0;
+      sound.bgSound.play();
+      break;
+    case Status.restart:
+      sound.bgSound.play();
+      break;
     case Status.win:
-      modal.setOnClick(readyToRestart);
-      modal.updateMessage("이겼습니다!!");
-      modal.toggleModal();
+      openModal("이겼습니다!!");
+      sound.win.play();
       break;
     case Status.lose:
-      modal.setOnClick(readyToRestart);
-      modal.updateMessage("졌네요!!");
-      modal.toggleModal();
+      openModal("졌습니다.!!");
+      sound.lose.play();
       break;
     case Status.pause:
-      modal.setOnClick(null);
-      modal.updateMessage("잠시 멈추었습니다.!!");
-      modal.toggleModal();
+      sound.bgSound.pause();
+      break;
+    case ItemName.carrot:
+      sound.carrotSound.play();
       break;
     default:
       throw new Error("오류발생");
@@ -37,4 +47,11 @@ game.setStopListener(stopListener);
 function readyToRestart() {
   game.isEnded = true;
   game.field.clearField();
+}
+
+function openModal(message) {
+  modal.setOnClick(readyToRestart);
+  modal.updateMessage(message);
+  modal.toggleModal();
+  sound.bgSound.pause();
 }

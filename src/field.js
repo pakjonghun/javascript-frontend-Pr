@@ -1,17 +1,30 @@
+import { ItemName } from "./game.js";
+
 export default class Field {
   constructor(carrots, bugs) {
     this.field = document.querySelector(".field");
     this.carrots = carrots;
     this.bugs = bugs;
     this.field.addEventListener("click", (event) => {
-      const target = event.target.classList;
-      if (target.contains("absolute")) {
-        if (!this.isPlaying) {
-          target.add("hide");
-          this.onClick && this.onClick(target);
-        }
+      if (this.isPlaying) return;
+
+      this.target = event.target.classList;
+      switch (true) {
+        case this.target.contains(ItemName.carrot):
+          this.onItemClick(ItemName.carrot);
+          break;
+        case this.target.contains(ItemName.bug):
+          this.onItemClick(ItemName.bug);
+          break;
+        default:
+          throw new Error("에러발생");
       }
     });
+  }
+
+  onItemClick(itemName) {
+    this.target.add("hide");
+    this.onClick && this.onClick(itemName);
   }
 
   setOnItemClick(func) {
